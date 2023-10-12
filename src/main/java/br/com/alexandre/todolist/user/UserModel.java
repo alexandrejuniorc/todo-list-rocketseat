@@ -11,16 +11,13 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import lombok.Data;
 
-@Data // set all getters and setters for variables
-// @Getter set getters for all variables
-// @Setter set setters for all variables
+@Data
 @Entity(name = "tb_users")
 public class UserModel {
     @Id
-    @GeneratedValue(generator = "UUID") // generate automatic id
+    @GeneratedValue(generator = "UUID")
     private UUID id;
 
-    // @Column(name = "usuario") set column name
     @Column(unique = true)
     private String username;
     private String name;
