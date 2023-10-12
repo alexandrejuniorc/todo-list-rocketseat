@@ -1,11 +1,13 @@
 package br.com.alexandre.todolist.task;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -39,4 +41,10 @@ public class TaskController {
         return ResponseEntity.status(HttpStatus.OK).body(task);
     }
 
+    @GetMapping("/")
+    public List<TaskModel> list(HttpServletRequest request) {
+        var userId = (UUID) request.getAttribute("userId");
+        var tasks = this.taskRepository.findByUserId(userId);
+        return tasks;
+    }
 }
